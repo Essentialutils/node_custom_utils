@@ -1,10 +1,15 @@
 {
     "name": "node_custom_utils",
     "license": "MIT",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
+    "description": "Optimize your Node.js code and elevate its personal utility with this intricately designed Node.js package, custom-tailored to streamline your development tasks for both personal and commercial applications.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Essentialutils/node_custom_utils.git"
+    },
     "scripts": {
         "build": "tsup index.ts --format cjs,esm --dts",
         "release": "npm publish"
