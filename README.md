@@ -16,7 +16,7 @@
 
 # Example Usage of Utility Functions
 
-1) Define a sample `Express` route handler
+1) Define a sample **Express** route handler
 
     ```typescript
     const sampleRouteHandler = (req: Request, res: Response) => {
@@ -50,7 +50,8 @@
 1) Add one day to a date
 
     ```typescript
-    const newDate = addOneDay("2023-09-07"); // Date representing the next day
+    const newDate = adjustDateByDays(new Date("2023-09-07")); 
+    
     ```
 1) Get an image URL with a placeholder if no data is available
 

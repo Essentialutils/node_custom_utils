@@ -195,19 +195,19 @@ export const isValidDateTime = (v: any): boolean => {
 };
 
 /**
- * Adds one day to a given date and returns the updated date.
+ * Adjusts a given date by a specified number of days.
  *
- * @param {string} dateString - The input date string in a valid date format.
- * @returns {Date} Returns a new Date object representing the date after adding one day.
+ * @param date - The date to be adjusted.
+ * @param dayCount - The number of days to add or subtract (default is 1).
+ * @param subtract - If true, subtracts the specified days; otherwise, adds them (default is false).
+ * @returns A new Date object representing the adjusted date.
  */
-export const addOneDay = (dateString: string): Date => {
-  // Create a Date object based on the provided date string.
-  const date = new Date(dateString);
-
-  // Add one day to the date using setDate() method.
-  date.setDate(date.getDate() + 1);
-
-  // Return the updated Date object.
+export const adjustDateByDays = (
+  date: Date,
+  dayCount = 1,
+  subtract = false
+): Date => {
+  date.setDate(date.getDate() + (subtract ? -dayCount : dayCount));
   return date;
 };
 
