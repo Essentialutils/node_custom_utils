@@ -88,13 +88,17 @@ export class ID {
    * Generates a unique ID combining the current timestamp and a random string.
    * @returns A unique ID.
    */
-  public getUniqueID = (): string => {
+  public getUniqueID = (
+    length: number = 4,
+    timeStamp: boolean = true
+  ): string => {
     // Get the current timestamp
     const timestamp = Date.now();
 
     // Define a function to generate a random string
     const randomStr = (length: number) => {
-      const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+      const characters =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       let randomString = "";
       for (let i = 0; i < length; i++) {
         const randomIndex = Math.floor(Math.random() * characters.length);
@@ -104,6 +108,6 @@ export class ID {
     };
 
     // Combine timestamp and random string to create a unique ID
-    return `${timestamp.toString(36)}${randomStr(4)}`;
+    return `${timeStamp ? timestamp.toString(36) : ""}${randomStr(length)}`;
   };
 }
