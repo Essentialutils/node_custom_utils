@@ -1,3 +1,7 @@
+[![npm](https://img.shields.io/npm/v/node_custom_utils.svg)](https://www.npmjs.org/package/node_custom_utils)
+[![downloads per month](http://img.shields.io/npm/dm/node_custom_utils.svg)](https://www.npmjs.org/package/node_custom_utils)
+
+
 # Generate Snowflake and Unique IDs
 
 1. Create an instance of the ID class with a machine ID
