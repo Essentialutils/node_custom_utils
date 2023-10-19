@@ -1,7 +1,6 @@
 [![npm](https://img.shields.io/npm/v/node_custom_utils.svg)](https://www.npmjs.org/package/node_custom_utils)
 [![downloads per month](http://img.shields.io/npm/dm/node_custom_utils.svg)](https://www.npmjs.org/package/node_custom_utils)
 
-
 # Generate Snowflake and Unique IDs
 
 1. Create an instance of the ID class with a machine ID
@@ -22,23 +21,46 @@
    console.log(`Unique ID: ${uniqueID}`);
    ```
 
-# Utility Functions for Manipulating URL Strings.
+# Verify the Integrity of Color Hash Codes
 
-1. Parses the query parameters from a given URL string and returns them as a Map.
+1. Checks if the given string represents a valid hexadecimal color code.
 
-   ```typescript
-   const urlString = "https://example.com/path?name=John&age=30";
-   const queryParams = cGetQueryParams(urlString);
-   console.log(queryParams.get("name")); // Output: 'John'
-   console.log(queryParams.get("age")); // Output: '30'
-   ```
+    ```typescript
+    "#123".cIsValidColorCode(); // true
+    "#12345".cIsValidColorCode(); // false
+    "red".cIsValidColorCode(); // false
+    ```
 
-1. Validates a URL string.
+# Handle string-based URL manipulation.
 
-   ```typescript
-   const isValid = cIsValidUrl("https://www.example.com");
-   console.log(isValid); // Output: true
-   ```
+1.  Parses the query parameters from a given URL string and returns them as a Map.
+
+    ```typescript
+    const urlString = "https://example.com/path?name=John&age=30";
+    const queryParams = cGetQueryParams(urlString);
+    console.log(queryParams.get("name")); // Output: 'John'
+    console.log(queryParams.get("age")); // Output: '30'
+    ```
+
+1.  Validates a URL string.
+
+    ```typescript
+    const isValid = cIsValidUrl("https://www.example.com");
+    console.log(isValid); // Output: true
+    ```
+
+1.  The `cUpdateQueryParam` function is an extension of the global `String` object in TypeScript. It provides a method for updating or adding query parameters to a URL string. This can be especially useful in web development when you need to modify URLs dynamically.
+
+    ```typescript
+    // Original URL
+    const originalUrl = "https://example.com/page?name=John";
+
+    // Updated URL with a new query parameter or modified existing parameter
+    const updatedUrl = originalUrl.cUpdateQueryParam("age", "30");
+
+    console.log(updatedUrl);
+    // Output: 'https://example.com/page?name=John&age=30'
+    ```
 
 # Example Usage of Utility Functions
 

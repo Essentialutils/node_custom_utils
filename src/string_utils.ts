@@ -30,3 +30,60 @@ export const cIsValidUrl = (url: string): boolean => {
   const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w]+(\/[\w- .\/?%&=]*)?$/;
   return urlPattern.test(url);
 };
+
+export const cAddOrUpdateQueryParam = (
+  url: string,
+  key: string,
+  value: string
+): string => {
+  const urlObject = new URL(url);
+  const searchParams = urlObject.searchParams;
+
+  // Check if the key already exists, if so, update its value
+  if (searchParams.has(key)) {
+    searchParams.set(key, value);
+  } else {
+    // If the key doesn't exist, add it to the URL
+    searchParams.append(key, value);
+  }
+
+  // Reconstruct the URL with the updated or added query parameter
+  urlObject.search = searchParams.toString();
+  return urlObject.toString();
+};
+
+/**
+ * Extends the String prototype to add a method for updating or adding query parameters.
+ * @param key - The query parameter key.
+ * @param value - The new value for the query parameter.
+ * @returns The updated URL string with the modified query parameter.
+ */
+String.prototype.cUpdateQueryParam = function (
+  key: string,
+  value: string
+): string {
+  // Check if the input string is a valid URL
+  if (cIsValidUrl(this.toString())) {
+    // Parse the URL string into a URL object
+    const urlObject = new URL(this.toString());
+    const searchParams = urlObject.searchParams;
+
+    // Check if the key already exists in the query parameters
+    if (searchParams.has(key)) {
+      // If the key exists, update its value
+      searchParams.set(key, value);
+    } else {
+      // If the key doesn't exist, add it to the query parameters
+      searchParams.append(key, value);
+    }
+
+    // Reconstruct the URL with the updated or added query parameter
+    urlObject.search = searchParams.toString();
+
+    // Return the updated URL string
+    return urlObject.toString();
+  } else {
+    // If the input string is not a valid URL, return the original string
+    return this.toString();
+  }
+};
