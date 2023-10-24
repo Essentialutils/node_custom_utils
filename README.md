@@ -21,15 +21,53 @@
    console.log(`Unique ID: ${uniqueID}`);
    ```
 
+# File upload
+
+1. Local server.
+
+   ```typescript
+   // Uploads a file to the local server.
+   const uploadedFileUrl = await FileUploadToLocalServer({
+     req,
+     pathToUpload,
+     imageKeyWord,
+   });
+   ```
+
+   ```typescript
+   // Deletes a file located at the specified path.
+   DeleteLocalServerFile(filePathToDelete);
+   ```
+
+1. S3 Spaces
+
+   ```typescript
+   // Allowed file extensions for upload
+   const allowedExtensions = [".jpg", ".png", ".jpeg"];
+
+   // Upload the file to the specified bucket
+   const uploadedFileKey = await FileUploadToSpacesBucket({
+     req,
+     pathToUpload,
+     imageKeyWord,
+     fileTypes: allowedExtensions,
+   });
+   ```
+
+   ```typescript
+   // Attempt to delete the file
+   const isDeleted = await DeleteFileSpacesBucket(fileKey);
+   ```
+
 # Verify the Integrity of Color Hash Codes
 
 1. Checks if the given string represents a valid hexadecimal color code.
 
-    ```typescript
-    "#123".cIsValidColorCode(); // true
-    "#12345".cIsValidColorCode(); // false
-    "red".cIsValidColorCode(); // false
-    ```
+   ```typescript
+   "#123".cIsValidColorCode(); // true
+   "#12345".cIsValidColorCode(); // false
+   "red".cIsValidColorCode(); // false
+   ```
 
 # Handle string-based URL manipulation.
 
