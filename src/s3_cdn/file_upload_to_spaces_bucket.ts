@@ -58,6 +58,11 @@ export const FileUploadToSpacesBucket = async ({
 
   // Get the uploaded file and its extension.
   const uploadedFile = files[imageKeyWord ?? "img"] as UploadedFile;
+
+  if (!uploadedFile?.name) {
+    throw new Error(`Not provided file for ${imageKeyWord ?? "img"}`);
+  }
+
   const ext = path.extname(uploadedFile.name).toLowerCase();
 
   // Check if the file format is supported.
