@@ -8,6 +8,7 @@ import {
   IFileUploadToLocalServer,
   envValidator,
 } from "./file_upload_utils";
+import { hasData } from "../common_express_utils";
 
 /**
  * Uploads a file to the specified DigitalOcean Spaces bucket.
@@ -114,9 +115,17 @@ export const FileUploadToSpacesBucket = async ({
  * // Attempt to delete the file
  * const isDeleted = await DeleteFileSpacesBucket(fileKey);
  */
-export const DeleteFileSpacesBucket = async (Key: string) => {
+export const DeleteFileSpacesBucket = async (Key?: string) => {
   try {
     envValidator();
+    if (!Key) {
+      throw new Error("Undefined Key");
+    }
+
+    if (!hasData(Key)) {
+      throw new Error("Invalid Key");
+    }
+
     // Configure the AWS SDK with your DigitalOcean Spaces credentials
     const spacesEndpoint = new AWS.Endpoint(process.env.CDN_ENDPOINT ?? "");
 
