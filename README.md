@@ -163,3 +163,26 @@
    ```typescript
    const stringValue = convertNumberToStringOrEmpty(0); // "" (empty string)
    ```
+
+# Converts a JSON string to a JavaScript object.
+
+```typescript
+const jsonData = '{"name": "John", "age": 30}';
+const jsonObject = cToJson(jsonData);
+console.log(jsonObject); // Output: { name: 'John', age: 30 }
+```
+
+```typescript
+const data = { name: "Alice", age: 25 };
+const convertedData = cToJson(data);
+console.log(convertedData); // Output: { name: 'Alice', age: 25 }
+```
+
+```typescript
+const invalidData = "not a valid JSON";
+try {
+  const result = cToJson(invalidData); // Throws an error
+} catch (error) {
+  console.error(error.message); // Output: "The data cannot be converted into a JSON format."
+}
+```
