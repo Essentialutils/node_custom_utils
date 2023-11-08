@@ -37,3 +37,39 @@ export const cToJson = (data: any): object | undefined => {
     throw new Error("The data cannot be converted into a JSON format.");
   }
 };
+
+/**
+ * Filters the input list to keep only the unique objects.
+ * @param inputList - An array of objects to filter for unique objects.
+ * @returns An array containing only the unique objects from the input list.
+ *
+ * @example
+ * // Example Usage
+ * const inputList = [
+ *   { id: 1, name: 'Alice' },
+ *   { id: 2, name: 'Bob' },
+ *   { id: 1, name: 'Alice' }, // Duplicate object
+ * ];
+ *
+ * const uniqueObjects = cGetUniqueObjects(inputList);
+ * console.log(uniqueObjects);
+ * // Output: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+ **/
+export const cGetUniqueObjects = (inputList: any[]): any[] => {
+  let uniqueObjects: { [key: string]: boolean } = {};
+
+  // Filter the input list, keeping only the unique objects
+  let outputList = inputList.filter((obj) => {
+    // Convert each object to a JSON string to use it as a key in the uniqueObjects object
+    let key = JSON.stringify(obj);
+    // If the object is not in uniqueObjects, add it and return true to keep it in the output list
+    if (!uniqueObjects[key]) {
+      uniqueObjects[key] = true;
+      return true;
+    }
+    // If the object is already in uniqueObjects, return false to remove it from the output list
+    return false;
+  });
+
+  return outputList;
+};

@@ -164,7 +164,7 @@
    const stringValue = convertNumberToStringOrEmpty(0); // "" (empty string)
    ```
 
-# Converts a JSON string to a JavaScript object.
+## Converts a JSON string to a JavaScript object.
 
 ```typescript
 const jsonData = '{"name": "John", "age": 30}';
@@ -185,4 +185,20 @@ try {
 } catch (error) {
   console.error(error.message); // Output: "The data cannot be converted into a JSON format."
 }
+```
+
+## Filters the input list to keep only the unique objects.
+
+> cGetUniqueObjects()
+
+```typescript
+// Example Usage
+const inputList = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+  { id: 1, name: "Alice" }, // Duplicate object
+];
+
+const uniqueObjects = cGetUniqueObjects(inputList);
+console.log(uniqueObjects);
 ```
