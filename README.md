@@ -202,3 +202,21 @@ const inputList = [
 const uniqueObjects = cGetUniqueObjects(inputList);
 console.log(uniqueObjects);
 ```
+
+## Base64
+
+> Encodes a string into Base64 format. `cEncodeToBase64()`
+
+```typescript
+let originalString = "Hello World!";
+let encodedString = originalString.cEncodeToBase64();
+console.log(`Encoded String: ${encodedString}`);
+```
+
+> Decodes a Base64 encoded string. `cDecodeFromBase64()`
+
+```typescript
+let originalString = "Hello World!";
+let decodedString = encodedString.cDecodeFromBase64();
+console.log(`Decoded String: ${decodedString}`);
+```
