@@ -48,3 +48,4 @@ export * from "./src/s3_cdn/file_upload_to_local_server";
 export * from "./src/s3_cdn/file_upload_to_spaces_bucket";
 export * from "./src/json_utils";
 export * from "./src/base64";
+export * from "./src/sha256";

@@ -220,3 +220,9 @@ let originalString = "Hello World!";
 let decodedString = encodedString.cDecodeFromBase64();
 console.log(`Decoded String: ${decodedString}`);
 ```
+
+## sha256
+
+```typescript
+cSha256('data');
+```
