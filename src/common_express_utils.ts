@@ -61,7 +61,7 @@ export const toJson = (
     message = "The operation has been completed successfully.",
     success = true,
     instance = `${
-      process.env.PRJ_NAME
+      process.env.PRJ_NAME || "PRJ_NAME"
     } ➜ ${id.getSnowflakeID()}:${id.getUniqueID()} ➜ ${moment().format(
       "LLLL"
     )}`,

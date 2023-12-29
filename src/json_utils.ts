@@ -34,7 +34,9 @@ export const cToJson = (data: any): object | undefined => {
         return;
     }
   } catch (error) {
-    throw new Error("The data cannot be converted into a JSON format.");
+    throw new Error(
+      "The conversion of the data into JSON format is unfeasible using the cToJson() function."
+    );
   }
 };
 
