@@ -221,8 +221,16 @@ let decodedString = encodedString.cDecodeFromBase64();
 console.log(`Decoded String: ${decodedString}`);
 ```
 
+## Converts a value to a boolean in a safe manner.
+
+```typescript
+const result = cToBooleanSafe("true"); // Returns true
+const result2 = cToBooleanSafe("false"); // Returns false
+const result3 = cToBooleanSafe(1); // Returns false
+```
+
 ## sha256
 
 ```typescript
-cSha256('data');
+cSha256("data");
 ```
