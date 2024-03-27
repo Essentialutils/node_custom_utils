@@ -234,3 +234,15 @@ const result3 = cToBooleanSafe(1); // Returns false
 ```typescript
 cSha256("data");
 ```
+
+## Asynchronously converts a CSV file to a JSON array.
+
+```typescript
+csvToJson('/path/to/file.csv').then(data => console.log(data));
+```
+
+## Asynchronously converts an array of JSON objects to a CSV file.
+
+```typescript
+jsonToCsv([{ name: 'John', age: 30 }], 'users').then(path => console.log(path));
+```
