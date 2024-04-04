@@ -15,7 +15,7 @@ import { ID } from "./id_utils";
  *
  * Note: This function depends on external functions `parseCsvLine` and `unescapeCSV`
  * for parsing CSV lines and unescaping values, respectively.
- * 
+ *
  * @example
  * csvToJson('/path/to/file.csv').then(data => console.log(data));
  */
@@ -36,28 +36,28 @@ export const csvToJson = async (csv_path: string): Promise<any[]> => {
 
 /**
  * Asynchronously converts an array of JSON objects to a CSV file.
- * 
+ *
  * Given an array of JSON objects, this function generates a CSV file
  * representing the data. The CSV file is saved with a generated name
- * based on a provided name parameter and an ID from an ID generator. 
+ * based on a provided name parameter and an ID from an ID generator.
  * The function ensures the directory for saving the CSV exists,
  * then writes the CSV file and returns its path.
- * 
+ *
  * @param {any[]} json - An array of JSON objects to be converted into a CSV file.
  * @param {string} name - A base name for the generated CSV file, which is enhanced
  *                        with an ID for uniqueness.
  * @returns {Promise<string>} - A promise that resolves to the path of the saved CSV file.
- * 
- * 
+ *
+ *
  * Note: This function uses `escapeCSV` for escaping values that need to be CSV-encoded.
- * It also relies on `fsx.ensureDir` and `fsx.writeFile` for file system operations, 
+ * It also relies on `fsx.ensureDir` and `fsx.writeFile` for file system operations,
  * which are part of the `fs-extra` library.
- * 
+ *
  * @example
- * 
+ *
  * jsonToCsv([{ name: 'John', age: 30 }], 'users').then(path => console.log(path));
- * 
- * 
+ *
+ *
  */
 export const jsonToCsv = async (json: any[], name: string): Promise<string> => {
   const idGenerator = new ID(1);

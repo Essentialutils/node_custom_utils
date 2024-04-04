@@ -238,11 +238,18 @@ cSha256("data");
 ## Asynchronously converts a CSV file to a JSON array.
 
 ```typescript
-csvToJson('/path/to/file.csv').then(data => console.log(data));
+csvToJson("/path/to/file.csv").then((data) => console.log(data));
 ```
 
 ## Asynchronously converts an array of JSON objects to a CSV file.
 
 ```typescript
-jsonToCsv([{ name: 'John', age: 30 }], 'users').then(path => console.log(path));
+jsonToCsv([{ name: "John", age: 30 }], "users").then((path) =>
+  console.log(path)
+);
 ```
+
+## Contributers
+
+- [Salmanul Faris K](https://github.com/iamfrs) ( Developer )
+- [Sharafas OM](https://github.com/sharafas-om) ( Maintainer and Publisher )
