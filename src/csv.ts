@@ -3,7 +3,7 @@ import * as fs from "fs";
 import { ID } from "./id_utils";
 
 /**
- * Asynchronously converts a CSV file to a JSON array.
+ * ## Asynchronously converts a CSV file to a JSON array.
  *
  * Reads a CSV file from a specified path, parsing its content into an array of objects.
  * Each object in the array represents a row from the CSV, with key-value pairs
@@ -16,8 +16,10 @@ import { ID } from "./id_utils";
  * Note: This function depends on external functions `parseCsvLine` and `unescapeCSV`
  * for parsing CSV lines and unescaping values, respectively.
  *
- * @example
+ * ### Example
+ * ```typescript
  * csvToJson('/path/to/file.csv').then(data => console.log(data));
+ * ```
  */
 export const csvToJson = async (csv_path: string): Promise<any[]> => {
   const data = await fs.promises.readFile(csv_path, "utf8");
@@ -35,7 +37,7 @@ export const csvToJson = async (csv_path: string): Promise<any[]> => {
 };
 
 /**
- * Asynchronously converts an array of JSON objects to a CSV file.
+ * ## Asynchronously converts an array of JSON objects to a CSV file.
  *
  * Given an array of JSON objects, this function generates a CSV file
  * representing the data. The CSV file is saved with a generated name
@@ -53,11 +55,10 @@ export const csvToJson = async (csv_path: string): Promise<any[]> => {
  * It also relies on `fsx.ensureDir` and `fsx.writeFile` for file system operations,
  * which are part of the `fs-extra` library.
  *
- * @example
- *
+ * ### Example
+ * ```typescript
  * jsonToCsv([{ name: 'John', age: 30 }], 'users').then(path => console.log(path));
- *
- *
+ * ```
  */
 export const jsonToCsv = async (json: any[], name: string): Promise<string> => {
   const idGenerator = new ID(1);

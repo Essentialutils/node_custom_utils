@@ -1,7 +1,7 @@
 export {};
 
 /**
- * Encodes a string into Base64 format.
+ * ## Encodes a string into Base64 format.
  *
  * This method extends the String prototype to provide a convenient way to encode
  * a regular string into Base64. It uses Node.js's Buffer class to handle the conversion.
@@ -14,7 +14,7 @@ String.prototype.cEncodeToBase64 = function (): string {
 };
 
 /**
- * Decodes a Base64 encoded string.
+ * ## Decodes a Base64 encoded string.
  *
  * This method extends the String prototype to provide a convenient way to decode
  * a Base64 string back to a regular string. It assumes the Base64 string is properly

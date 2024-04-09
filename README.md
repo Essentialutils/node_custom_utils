@@ -250,26 +250,31 @@ jsonToCsv([{ name: "John", age: 30 }], "users").then((path) =>
 ```
 
 ## Gets the months that fall between two given dates.
-1) > Get full month names between January 1, 2022, and March 1, 2022
-    ```typescript
-    cGetMonthBetweenDates("2022-01-01", "2022-03-01", true);
-    ```
-    // Returns ["January", "February", "March"]
 
-1) > Get month numbers between January 1, 2022, and March 1, 2022
-    ```typescript
-    cGetMonthBetweenDates("2022-01-01", "2022-03-01");
-    ```
-    // Returns ["1", "2", "3"]
+1. > Get full month names between January 1, 2022, and March 1, 2022
+
+   ```typescript
+   cGetMonthBetweenDates("2022-01-01", "2022-03-01", true);
+   ```
+
+   // Returns ["January", "February", "March"]
+
+1. > Get month numbers between January 1, 2022, and March 1, 2022
+   ```typescript
+   cGetMonthBetweenDates("2022-01-01", "2022-03-01");
+   ```
+   // Returns ["1", "2", "3"]
 
 ## Checks if two dates fall within the same calendar year.
-1)  ```typescript
-    cHaveSameYear('2023-01-01', '2023-12-31');
+
+1.  ```typescript
+    cHaveSameYear("2023-01-01", "2023-12-31");
     ```
+
     // Returns true
 
-1)  ```typescript
-    cHaveSameYear('2023-12-31', '2024-01-01');
+1.  ```typescript
+    cHaveSameYear("2023-12-31", "2024-01-01");
     ```
     // Returns false
 

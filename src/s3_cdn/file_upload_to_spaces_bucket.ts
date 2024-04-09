@@ -11,7 +11,7 @@ import {
 import { hasData } from "../common_express_utils";
 
 /**
- * Uploads a file to the specified DigitalOcean Spaces bucket.
+ * ## Uploads a file to the specified DigitalOcean Spaces bucket.
  * @async
  * @function
  * @param {Object} options - The options for file upload.
@@ -22,7 +22,7 @@ import { hasData } from "../common_express_utils";
  * @throws {Error} Throws an error if the file format is not supported or if files are not provided in the request.
  * @returns {Promise<string>} A Promise that resolves with the key of the uploaded file.
  *
- * @example
+ * ```typescript
  * // Allowed file extensions for upload
  * const allowedExtensions = ['.jpg', '.png', '.jpeg'];
  *
@@ -33,6 +33,7 @@ import { hasData } from "../common_express_utils";
  *   imageKeyWord,
  *   fileTypes: allowedExtensions,
  * });
+ * ```
  **/
 export const FileUploadToSpacesBucket = async ({
   req,
@@ -54,21 +55,25 @@ export const FileUploadToSpacesBucket = async ({
 
   // Check if files are provided in the request.
   if (!files || Object.keys(files).length === 0) {
-    throw new Error("Please provide an image file");
+    throw new Error(
+      "It appears that no file has been uploaded on your part. Kindly proceed to upload the necessary document."
+    );
   }
 
   // Get the uploaded file and its extension.
   const uploadedFile = files[imageKeyWord ?? "img"] as UploadedFile;
 
   if (!uploadedFile?.name) {
-    throw new Error(`Not provided file for ${imageKeyWord ?? "img"}`);
+    throw new Error(
+      `No file specified for ${imageKeyWord ?? "img"} has been provided.`
+    );
   }
 
   const ext = path.extname(uploadedFile.name).toLowerCase();
 
   // Check if the file format is supported.
   if (!fileTypes.includes(ext)) {
-    throw new Error("The file format is not supported");
+    throw new Error("The file format you have submitted is not compatible.");
   }
 
   // Define paths for the upload directory and the uploaded file.

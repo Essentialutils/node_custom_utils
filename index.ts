@@ -37,10 +37,10 @@ declare global {
     cEncodeToBase64(): string;
   }
 }
+export * from "./src/depreciated";
 
 export * from "./src/common_express_utils";
 export * from "./src/id_utils";
-export * from "./src/depreciated";
 export * from "./src/string_utils";
 export * from "./src/color_code";
 export * from "./src/s3_cdn/file_upload_utils";
@@ -51,4 +51,4 @@ export * from "./src/base64";
 export * from "./src/sha256";
 export * from "./src/boolean_utils";
 export * from "./src/csv";
-export * from "./src/date_utils"
+export * from "./src/date_utils";

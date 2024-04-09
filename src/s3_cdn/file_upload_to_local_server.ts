@@ -7,7 +7,7 @@ import {
 } from "./file_upload_utils";
 
 /**
- * Uploads a file to the local server.
+ * ## Uploads a file to the local server.
  * @param {Object} options - The options for file upload.
  * @param {Object} options.req - The request object containing the uploaded files.
  * @param {string} options.pathToUpload - The path on the server where the file will be uploaded.
@@ -17,14 +17,14 @@ import {
  *         uploaded file already exists, or if there are any file operation errors.
  * @returns {string} - The URL of the uploaded file on the server.
  *
- * @example
+ *```typescript
  * // Call the FileUploadToLocalServer function
  * const uploadedFileUrl = await FileUploadToLocalServer({
  *   req,
  *   pathToUpload,
  *   imageKeyWord,
  * });
- *
+ *```
  **/
 export const FileUploadToLocalServer = async ({
   req,
@@ -36,21 +36,25 @@ export const FileUploadToLocalServer = async ({
 
   // Check if files are provided in the request.
   if (!files || Object.keys(files).length === 0) {
-    throw new Error("Please provide an image file");
+    throw new Error(
+      "It appears that no file has been uploaded on your part. Kindly proceed to upload the necessary document."
+    );
   }
 
   // Get the uploaded file and its extension.
   const uploadedFile = files[imageKeyWord ?? "img"] as UploadedFile;
 
   if (!uploadedFile?.name) {
-    throw new Error(`Not provided file for ${imageKeyWord ?? "img"}`);
+    throw new Error(
+      `No file specified for ${imageKeyWord ?? "img"} has been provided.`
+    );
   }
 
   const ext = path.extname(uploadedFile.name).toLowerCase();
 
   // Check if the file format is supported.
   if (!fileTypes.includes(ext)) {
-    throw new Error("The file format is not supported");
+    throw new Error("The file format you have submitted is not compatible.");
   }
 
   // Define paths for the upload directory and the uploaded file.
@@ -62,7 +66,9 @@ export const FileUploadToLocalServer = async ({
 
   // Check if the uploaded file already exists.
   if (fsx.existsSync(up)) {
-    throw new Error("Uploaded file already exists. Please try another one");
+    throw new Error(
+      "The file uploaded is already present in our system. Kindly upload a different file."
+    );
   }
 
   // Ensure the upload directory exists and move the uploaded file.

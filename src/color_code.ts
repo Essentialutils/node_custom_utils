@@ -1,6 +1,6 @@
 export {};
 /**
- * Checks if the given string represents a valid hexadecimal color code.
+ * ## Checks if the given string represents a valid hexadecimal color code.
  *
  * @returns {boolean} `true` if the string is a valid color code, `false` otherwise.
  *

@@ -1,5 +1,5 @@
 /**
- * Parses the query parameters from a given URL string and returns them as a Map.
+ * ## Parses the query parameters from a given URL string and returns them as a Map.
  *
  * @param {string} urlString - The URL string from which to extract query parameters.
  * @returns {Map<string, string>} A Map containing the query parameters as key-value pairs.
@@ -17,7 +17,7 @@ export const cGetQueryParams = (urlString: string): Map<string, string> => {
 };
 
 /**
- * Validates a URL string.
+ * ## Validates a URL string.
  *
  * @param {string} url - The URL string to be validated.
  * @returns {boolean} - True if the input URL is valid, false otherwise.
@@ -27,33 +27,23 @@ export const cGetQueryParams = (urlString: string): Map<string, string> => {
  * console.log(isValid); // Output: true
  */
 export const cIsValidUrl = (url: string): boolean => {
-  const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w]+(\/[\w- .\/?%&=]*)?$/;
-  return urlPattern.test(url);
-};
+  const urlPattern =
+    /^(https?:\/\/)(([0-9]{1,3}\.){3}[0-9]{1,3}|([\w-]+\.)+[\w]+)(:[0-9]+)?(\/[\w- .\/?%&=#]*)?$/;
 
-export const cAddOrUpdateQueryParam = (
-  url: string,
-  key: string,
-  value: string
-): string => {
-  const urlObject = new URL(url);
-  const searchParams = urlObject.searchParams;
-
-  // Check if the key already exists, if so, update its value
-  if (searchParams.has(key)) {
-    searchParams.set(key, value);
-  } else {
-    // If the key doesn't exist, add it to the URL
-    searchParams.append(key, value);
+  if (urlPattern.test(url)) {
+    const portMatch = url.match(/:(\d+)/);
+    if (portMatch && portMatch[1]) {
+      // Since portMatch and portMatch[1] are checked, TypeScript knows portMatch[1] is not undefined here.
+      const portNumber = parseInt(portMatch[1], 10);
+      return portNumber >= 1 && portNumber <= 65535;
+    }
+    return true;
   }
-
-  // Reconstruct the URL with the updated or added query parameter
-  urlObject.search = searchParams.toString();
-  return urlObject.toString();
+  return false;
 };
 
 /**
- * Extends the String prototype to add a method for updating or adding query parameters.
+ * ## Extends the String prototype to add a method for updating or adding query parameters.
  * @param key - The query parameter key.
  * @param value - The new value for the query parameter.
  * @returns The updated URL string with the modified query parameter.

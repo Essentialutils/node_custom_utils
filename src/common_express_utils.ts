@@ -45,7 +45,7 @@ export const getApiKey = (req: Request): string => {
 };
 
 /**
- * Constructs a JSON response to be sent to the client.
+ * ## Constructs a JSON response to be sent to the client.
  *
  * @param {Response} res - The response object to send the JSON response to.
  * @param {object} options - An object containing response data and optional metadata.
@@ -84,7 +84,7 @@ export const toJson = (
 };
 
 /**
- * Constructs an error response to be sent to the client.
+ * ## Constructs an error response to be sent to the client.
  *
  * @param {Response} res - The response object to send the error response to.
  * @param {any} error - The error object or message to be included in the response.
@@ -107,7 +107,7 @@ export const errorResponse = (res: Response, error: any) => {
 };
 
 /**
- * Checks whether a given value has data or not.
+ * ## Checks whether a given value has data or not.
  * @param v - The value to be checked.
  * @returns `true` if the value has data, otherwise `false`.
  */
@@ -135,7 +135,7 @@ export const hasData = (v: unknown): boolean => {
 };
 
 /**
- * Checks if an array contains any duplicate elements.
+ * ## Checks if an array contains any duplicate elements.
  *
  * @param {any[]} arr - The input array to be checked for duplicates.
  * @returns {boolean} Returns true if duplicates are found, false otherwise.
@@ -147,7 +147,7 @@ export const hasDuplicates = (arr: any[]): boolean => {
 };
 
 /**
- * Checks if a given string contains the character ':'.
+ * ## Checks if a given string contains the character ':'.
  *
  * @param {string} value - The input string to be checked for the presence of ':'.
  * @returns {boolean} Returns true if the input string contains ':', false otherwise.
@@ -166,7 +166,7 @@ export const getImg = (v?: any): string => {
 };
 
 /**
- * Compare two JSON objects for deep equality.
+ * ## Compare two JSON objects for deep equality.
  *
  * @param obj1 - The first JSON object.
  * @param obj2 - The second JSON object.

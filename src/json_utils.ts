@@ -1,47 +1,56 @@
 /**
- * Converts a JavaScript object or a JSON string to a JavaScript object.
+ * ## Converts a valid JSON string, object, or array into its corresponding object or array structure.
+ * This function is designed to facilitate easy conversion and validation of JSON data by returning
+ * the input directly if it's already an object (non-null) or array, or by attempting to parse it if
+ * it's a string. If the input cannot be converted, the function throws an error.
  *
- * @param {any} data - The input data to be converted to a JavaScript object.
- * @returns {object | undefined} - A JavaScript object if the input is a JSON string or an object, undefined otherwise.
- * @throws {Error} Will throw an error if the input data cannot be converted into a JSON format.
+ * @param {string | object | Array<any>} input - The input to convert to a JSON object or array. Can be a JSON string, an object, or an array.
+ * @returns {object | Array<any>} The parsed object or array if the input is a valid JSON string, or the input itself if it's already an object or array.
+ * @throws {Error} Throws an error if the input is not a valid JSON string, object, or array, or if parsing fails. The error message includes a more descriptive message and, optionally, the original error message.
+ * @example
+ * // returns { a: 1 }
+ * cToJson('{"a": 1}');
  *
  * @example
- * const jsonData = '{"name": "John", "age": 30}';
- * const jsonObject = cToJson(jsonData);
- * console.log(jsonObject); // Output: { name: 'John', age: 30 }
+ * // returns [1, 2, 3]
+ * cToJson("[1, 2, 3]");
  *
  * @example
- * const data = { name: 'Alice', age: 25 };
- * const convertedData = cToJson(data);
- * console.log(convertedData); // Output: { name: 'Alice', age: 25 }
+ * // throws Error: "The input must be a valid JSON string, object, or array."
+ * cToJson(42);
  *
  * @example
- * const invalidData = 'not a valid JSON';
- * try {
- *   const result = cToJson(invalidData); // Throws an error
- * } catch (error) {
- *   console.error(error.message); // Output: "The data cannot be converted into a JSON format."
- * }
+ * // returns { b: 2 }
+ * cToJson({ b: 2 });
  */
-export const cToJson = (data: any): object | undefined => {
-  try {
-    switch (typeof data) {
-      case "object":
-        return data;
-      case "string":
-        return JSON.parse(data);
-      default:
-        return;
-    }
-  } catch (error) {
-    throw new Error(
-      "The conversion of the data into JSON format is unfeasible using the cToJson() function."
-    );
+export const cToJson = (
+  input: string | object | Array<any>
+): object | Array<any> | never => {
+  // Explicitly include 'never' to indicate this function might throw
+  // Directly return if input is an object (which includes arrays) but not null
+  if (typeof input === "object" && input !== null) {
+    return input;
   }
+
+  // Attempt to parse if the input is a string
+  if (typeof input === "string") {
+    try {
+      const parsed = JSON.parse(input);
+      if (typeof parsed === "object" && parsed !== null) {
+        return parsed;
+      }
+    } catch (error: any) {
+      // Provide a more descriptive error message, optionally including the original error
+      throw new Error("Failed to parse input as JSON. " + error.message);
+    }
+  }
+
+  // If neither an object/array nor a parseable string, throw an error
+  throw new Error("The input must be a valid JSON string, object, or array.");
 };
 
 /**
- * Filters the input list to keep only the unique objects.
+ * ## Filters the input list to keep only the unique objects.
  * @param inputList - An array of objects to filter for unique objects.
  * @returns An array containing only the unique objects from the input list.
  *

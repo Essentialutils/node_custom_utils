@@ -1,17 +1,43 @@
 /**
- * Converts a value to a boolean in a safe manner.
+ * ## Converts a wide range of values to a boolean in a safe manner.
  *
- * This function checks if the input value is truthy and if its string representation is "true".
- * If the value is truthy and its string representation is "true", it returns true; otherwise, it returns false.
+ * This function is designed to handle `null`, `undefined`, boolean values,
+ * numeric values interpreted as booleans (0 and 1), and string representations
+ * thereof. It trims the input, converts it to lowercase, and evaluates it.
+ * Returns `false` by default for any input not explicitly recognized as `true`.
  *
- * @param {*} value - The value to be converted to a boolean.
+ * @param {any} value - The input value to convert to a boolean.
  * @returns {boolean} - The boolean representation of the input value.
- *
- * @example
- * const result = cToBooleanSafe("true"); // Returns true
- * const result2 = cToBooleanSafe("false"); // Returns false
- * const result3 = cToBooleanSafe(1); // Returns false
  */
 export const cToBooleanSafe = (value: any): boolean => {
-  return value ? value.toString() === "true" : false;
+  // Handle the case where value is exactly null or undefined
+  if (value === null || value === undefined) {
+    return false;
+  }
+
+  // Handle boolean values directly
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  // Convert value to string in a safe manner and trim any leading/trailing spaces
+  const stringValue = String(value).trim().toLowerCase();
+
+  // Handle string values that are 'true' or 'false' explicitly
+  if (stringValue === "true") {
+    return true;
+  } else if (stringValue === "false") {
+    return false;
+  }
+
+  // Explicitly handle '0' and '1' string cases
+  if (stringValue === "0") {
+    return false;
+  } else if (stringValue === "1") {
+    return true;
+  }
+
+  // For all other cases, return a default false to ensure the function is safe
+  // against unexpected input types, or you could throw an error if preferred
+  return false;
 };

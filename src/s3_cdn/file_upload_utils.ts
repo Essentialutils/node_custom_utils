@@ -8,7 +8,7 @@ export interface IFileUploadToLocalServer {
   fileTypes?: string[];
 }
 
-export const ALLOWED_EXTENSIONS = [".png", ".jpg", ".jpeg"];
+export const ALLOWED_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp"];
 
 export const envValidator = () => {
   const {
@@ -20,22 +20,26 @@ export const envValidator = () => {
   } = process.env;
 
   if (!hasData(CDN_BASE_URL)) {
-    throw new Error("CDN_BASE_URL env is required");
+    throw new Error("The environment variable 'CDN_BASE_URL' is mandatory.");
   }
 
   if (!hasData(CDN_ENDPOINT)) {
-    throw new Error("CDN_ENDPOINT env is required");
+    throw new Error("The 'CDN_ENDPOINT' environment variable is essential.");
   }
 
   if (!hasData(CDN_ACCESS_KEY_ID)) {
-    throw new Error("CDN_ACCESS_KEY_ID env is required");
+    throw new Error(
+      "The environment variable 'CDN_ACCESS_KEY_ID' is obligatory."
+    );
   }
 
   if (!hasData(CDN_SECRET_ACCESS_KEY)) {
-    throw new Error("CDN_SECRET_ACCESS_KEY env is required");
+    throw new Error(
+      "The 'CDN_SECRET_ACCESS_KEY' environment variable is compulsory."
+    );
   }
 
   if (!hasData(CDN_BUCKET)) {
-    throw new Error("CDN_BUCKET env is required");
+    throw new Error("The environment variable 'CDN_BUCKET' is necessary.");
   }
 };

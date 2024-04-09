@@ -14,13 +14,13 @@ import { commonDateFormat, commonDateTimeFormat } from "./common_express_utils";
  * @param {string} endDateStr - The end date in string format.
  * Must be a format recognized by the JavaScript Date constructor.
  * @returns {boolean} - Returns true if both dates are within the same calendar year, otherwise false.
- * 
+ *
  * ---
- * 
+ *
  * ```typescript
  * cHaveSameYear('2023-01-01', '2023-12-31');
  * // Returns true
- * 
+ *
  * cHaveSameYear('2023-12-31', '2024-01-01');
  * // Returns false
  * ```
@@ -53,16 +53,16 @@ export const cHaveSameYear = (
  * ---
  *
  * ## Usage Example
- * 
+ *
  * ```typescript
  * // Get full month names between January 1, 2022, and March 1, 2022
- * cGetMonthBetweenDates("2022-01-01", "2022-03-01", true); 
+ * cGetMonthBetweenDates("2022-01-01", "2022-03-01", true);
  * // Returns ["January", "February", "March"]
- * 
+ *
  * // Get month numbers between January 1, 2022, and March 1, 2022
- * cGetMonthBetweenDates("2022-01-01", "2022-03-01"); 
+ * cGetMonthBetweenDates("2022-01-01", "2022-03-01");
  * // Returns ["1", "2", "3"]
- * 
+ *
  * ```
  */
 export const cGetMonthBetweenDates = (
