@@ -160,57 +160,6 @@ export const containAppChars = (value: string): boolean => {
   return regex.test(value);
 };
 
-/**
- * Checks if a given value is a valid date based on a specific date format.
- *
- * @param {any} v - The value to be checked for validity as a date.
- * @returns {boolean} Returns true if the value is a valid date, false otherwise.
- */
-export const isValidDate = (v: any): boolean => {
-  try {
-    // Use the moment library to parse the value using a specific date format (appDateFormat) with strict parsing.
-    // Check if the parsed date is valid.
-    return moment(v, commonDateFormat, true).isValid();
-  } catch (error) {
-    // If an error occurs during parsing, return false.
-    return false;
-  }
-};
-
-/**
- * Checks if a given value is a valid date and time based on a specific date-time format.
- *
- * @param {any} v - The value to be checked for validity as a date and time.
- * @returns {boolean} Returns true if the value is a valid date and time, false otherwise.
- */
-export const isValidDateTime = (v: any): boolean => {
-  try {
-    // Use the moment library to parse the value using a specific date-time format (appDateTimeFormat) with strict parsing.
-    // Check if the parsed date and time are valid.
-    return moment(v, commonDateTimeFormat, true).isValid();
-  } catch (error) {
-    // If an error occurs during parsing, return false.
-    return false;
-  }
-};
-
-/**
- * Adjusts a given date by a specified number of days.
- *
- * @param date - The date to be adjusted.
- * @param dayCount - The number of days to add or subtract (default is 1).
- * @param subtract - If true, subtracts the specified days; otherwise, adds them (default is false).
- * @returns A new Date object representing the adjusted date.
- */
-export const adjustDateByDays = (
-  date: Date,
-  dayCount = 1,
-  subtract = false
-): Date => {
-  date.setDate(date.getDate() + (subtract ? -dayCount : dayCount));
-  return date;
-};
-
 export const getImg = (v?: any): string => {
   if (hasData(v)) return v;
   return "https://via.placeholder.com/500";
