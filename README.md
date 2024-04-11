@@ -226,7 +226,7 @@ console.log(`Decoded String: ${decodedString}`);
 ```typescript
 const result = cToBooleanSafe("true"); // Returns true
 const result2 = cToBooleanSafe("false"); // Returns false
-const result3 = cToBooleanSafe(1); // Returns false
+const result3 = cToBooleanSafe(1); // Returns true
 ```
 
 ## sha256
@@ -277,6 +277,25 @@ jsonToCsv([{ name: "John", age: 30 }], "users").then((path) =>
     cHaveSameYear("2023-12-31", "2024-01-01");
     ```
     // Returns false
+
+## Changes the month and optionally the day of a given date string.
+
+1.  ```typescript
+    // Change the month of March 15, 2023, to February
+    cChangeDateMonthAndDay("2023-03-15", 2);
+    // Returns "2023-02-15"
+    ```
+
+1.  ```typescript
+    // Change the month and day of March 15, 2023, to February 28
+    cChangeDateMonthAndDay("2023-03-15", 2, 28);
+    // Returns "2023-02-28"
+    ```
+1.  ```typescript
+    // Attempt to set an invalid date (February 30th)
+    cChangeDateMonthAndDay("2023-03-15", 2, 30);
+    // Logs "Invalid day for the given month" and returns "2023-03-15"
+    ```
 
 ## Contributers
 

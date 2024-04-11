@@ -95,6 +95,64 @@ export const cGetMonthBetweenDates = (
 };
 
 /**
+ * ## Changes the month and optionally the day of a given date string.
+ *
+ * This function takes a date string, a new month, and an optional new day,
+ * then returns a new date string with the updated month and day. The function
+ * ensures that the new date is valid, particularly that the new day exists
+ * within the specified new month. If the new day is outside the valid range,
+ * the function logs an error and returns the original date string.
+ *
+ * @param {string} dateStr - The original date string in ISO format (YYYY-MM-DD).
+ * @param {number} newMonth - The new month as a number (1-12).
+ * @param {number} [newDay] - The optional new day as a number. If not provided,
+ *                            the day of the month from the original date is retained.
+ * @returns {string} The new date in ISO format (YYYY-MM-DD) if the operation is successful,
+ *                   otherwise returns the original date string. If the resulting date is invalid,
+ *                   returns '__invalid_date__'.
+ *
+ * ```typescript
+ * // Change the month of March 15, 2023, to February
+ * cChangeDateMonthAndDay("2023-03-15", 2);
+ * // Returns "2023-02-15"
+ *
+ * // Change the month and day of March 15, 2023, to February 28
+ * cChangeDateMonthAndDay("2023-03-15", 2, 28);
+ * // Returns "2023-02-28"
+ *
+ * // Attempt to set an invalid date (February 30th)
+ * cChangeDateMonthAndDay("2023-03-15", 2, 30);
+ * // Logs "Invalid day for the given month" and returns "2023-03-15"
+ * ```
+ */
+export const cChangeDateMonthAndDay = (
+  dateStr: string,
+  newMonth: number,
+  newDay?: number
+): string => {
+  // Parse the input date string to a Date object
+  const date = new Date(dateStr);
+
+  // Set the new month, adjusting the month index by -1 since months are 0-based
+  date.setMonth(newMonth - 1);
+
+  // If newDay is provided, set the day. Otherwise, keep the original day
+  // Note: Before setting the day, check if the newDay is within the valid range for the new month
+  if (newDay !== undefined) {
+    const daysInNewMonth = new Date(date.getFullYear(), newMonth, 0).getDate();
+    if (newDay > 0 && newDay <= daysInNewMonth) {
+      date.setDate(newDay);
+    } else {
+      console.error("Invalid day for the given month");
+      return dateStr; // Return the original date string if the new day is invalid
+    }
+  }
+
+  // Return the new date as a string
+  return date.toISOString().split("T")[0] ?? "__invalid_date__";
+};
+
+/**
  * Checks if a given value is a valid date based on a specific date format.
  *
  * @param {any} v - The value to be checked for validity as a date.
