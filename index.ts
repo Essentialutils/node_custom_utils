@@ -52,3 +52,4 @@ export * from "./src/sha256";
 export * from "./src/boolean_utils";
 export * from "./src/csv";
 export * from "./src/date_utils";
+export * from "./src/number_utils";

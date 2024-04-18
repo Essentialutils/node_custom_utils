@@ -297,6 +297,21 @@ jsonToCsv([{ name: "John", age: 30 }], "users").then((path) =>
     // Logs "Invalid day for the given month" and returns "2023-03-15"
     ```
 
+## Converts a floating-point number to an integer.
+
+1. ```typescript
+   cConvertDoubleToInt(NaN);
+   ```
+   > returns 0
+1. ```typescript
+   cConvertDoubleToInt(1.0);
+   ```
+   > returns 100
+1. ```typescript
+   cConvertDoubleToInt(123.45);
+   ```
+   > returns 12345
+
 ## Contributers
 
 - [Salmanul Faris K](https://github.com/iamfrs) ( Developer )
