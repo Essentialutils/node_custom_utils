@@ -1,33 +1,17 @@
 /**
- * ## Converts a floating-point number to an integer.
- * If the number is not a floating-point (i.e., it is already an integer or NaN), specific rules apply:
- * - For NaN (Not a Number), the function returns 0.
- * - For integers, it simply returns the same integer value.
- * - For floating-point numbers, it truncates the number after multiplying by 100 (effectively handling two decimal places).
+ * Converts a floating-point number to an integer representation by multiplying by 100 and rounding.
+ * This can be useful for scenarios where precision to two decimal places is needed in integer form,
+ * such as storing currency values in cents to avoid floating point arithmetic issues.
  *
- * @param {number} num - The number to convert. Can be any floating-point number or integer.
- * @returns {number} The converted integer. If the input is NaN, returns 0.
- *                  For floating-point numbers, returns the truncated integer of the number multiplied by 100.
- *                  For integers, returns the integer itself.
+ * @param {number} num - The floating-point number to be converted. If this is not a number, it defaults to 0.
+ * @returns {number} The converted integer. The input is first checked if it is a number using `isNaN`.
+ *                   If it is not a number, the function defaults to 0. Otherwise, it multiplies the number
+ *                   by 100 and rounds it to the nearest integer to handle the conversion.
  *
- * @example
- * // returns 0
- * cConvertDoubleToInt(NaN);
- *
- * @example
- * // returns 100
- * cConvertDoubleToInt(1.0);
- *
- * @example
- * // returns 12345
- * cConvertDoubleToInt(123.45);
+ * Example:
+ * cConvertDoubleToInt(123.456) // Returns 12346
+ * cConvertDoubleToInt(NaN)     // Returns 0
  */
 export const cConvertDoubleToInt = (num: number): number => {
-  // Check if the input is NaN
-  if (isNaN(num)) {
-    return 0; // Return 0 if the input is NaN
-  }
-  // Proceed with the original logic if the input is a valid number
-  return num % 1 === 0 ? num : Math.trunc(num * 100);
+  return Math.round((isNaN(num) ? 0 : num) * 100);
 };
-0;
