@@ -35,41 +35,29 @@ export const cHaveSameYear = (
 };
 
 /**
- * ## Gets the months that fall between two given dates.
+ * ## Generates an array of objects, each representing a distinct month (and year) within a specified date range.
+ * Each object includes the year, month number, and month name.
  *
- * This function can return the months either as their full names (e.g., "January")
- * or as their numeric representations (e.g., 1 for January). It validates that the
- * start date is before the end date and throws an error if this condition is not met.
+ * @param {string} startDateStr - The start date of the period in ISO format (YYYY-MM-DD).
+ * @param {string} endDateStr - The end date of the period in ISO format (YYYY-MM-DD).
+ * @returns {{ year: number; monthNumber: number; monthName: string }[]} An array of objects with year, monthNumber, and monthName.
+ * @throws {Error} If the start date is after the end date.
  *
- * @param {string} startDateStr - The start date as a string in a format recognized by the Date constructor (e.g., "YYYY-MM-DD").
- * @param {string} endDateStr - The end date as a string in a format recognized by the Date constructor.
- * @param {boolean} [returnAsName=false] - Flag to determine the format of the returned month names.
- * If true, returns month names as full names ("January", "February", etc.).
- * If false, returns month names as numeric representations ("1" for January, "2" for February, etc.).
- * Defaults to false.
- * @returns {string[]} - An array of month names or numbers between the given start and end dates, inclusive.
- * @throws {Error} - Throws an error if the start date is after the end date, with the message "Start date must be before end date".
- *
- * ---
- *
- * ## Usage Example
- *
- * ```typescript
- * // Get full month names between January 1, 2022, and March 1, 2022
- * cGetMonthBetweenDates("2022-01-01", "2022-03-01", true);
- * // Returns ["January", "February", "March"]
- *
- * // Get month numbers between January 1, 2022, and March 1, 2022
- * cGetMonthBetweenDates("2022-01-01", "2022-03-01");
- * // Returns ["1", "2", "3"]
- *
- * ```
+ * @example
+ * // Get year, month number, and month name from January 2022 to March 2022
+ * const details = cGetYearMonthDetailsBetweenDates("2022-01-01", "2022-03-01");
+ * console.log(details);
+ * // Output:
+ * // [
+ * //   { year: 2022, monthNumber: 1, monthName: "January" },
+ * //   { year: 2022, monthNumber: 2, monthName: "February" },
+ * //   { year: 2022, monthNumber: 3, monthName: "March" }
+ * // ]
  */
-export const cGetMonthBetweenDates = (
+export const cGetYearMonthDetailsBetweenDates = (
   startDateStr: string,
-  endDateStr: string,
-  returnAsName = false
-): string[] => {
+  endDateStr: string
+): { year: number; monthNumber: number; monthName: string }[] => {
   const startDate = new Date(startDateStr);
   const endDate = new Date(endDateStr);
 
@@ -77,21 +65,28 @@ export const cGetMonthBetweenDates = (
     throw new Error("Start date must be before end date");
   }
 
-  const monthNames: string[] = [];
+  const details: { year: number; monthNumber: number; monthName: string }[] =
+    [];
   const currentDate = new Date(startDate);
 
   while (currentDate <= endDate) {
-    const monthIdentifier = returnAsName
-      ? currentDate.toLocaleString("default", { month: "long" })
-      : (currentDate.getMonth() + 1).toString();
+    const year = currentDate.getFullYear();
+    const monthNumber = currentDate.getMonth() + 1; // Get month number (1-12)
+    const monthName = currentDate.toLocaleString("default", { month: "long" });
 
-    if (!monthNames.includes(monthIdentifier)) {
-      monthNames.push(monthIdentifier);
+    // Check if the current month and year are already included
+    if (
+      !details.some(
+        (detail) => detail.year === year && detail.monthNumber === monthNumber
+      )
+    ) {
+      details.push({ year, monthNumber, monthName });
     }
-    currentDate.setMonth(currentDate.getMonth() + 1);
+
+    currentDate.setMonth(currentDate.getMonth() + 1); // Move to the next month
   }
 
-  return monthNames;
+  return details;
 };
 
 /**

@@ -63,3 +63,64 @@ export const cAddOrUpdateQueryParam = (
   urlObject.search = searchParams.toString();
   return urlObject.toString();
 };
+
+/**
+ * @deprecated - Use `cGetYearMonthDetailsBetweenDates()` instead.
+ * ## Gets the months that fall between two given dates.
+ *
+ * This function can return the months either as their full names (e.g., "January")
+ * or as their numeric representations (e.g., 1 for January). It validates that the
+ * start date is before the end date and throws an error if this condition is not met.
+ *
+ * @param {string} startDateStr - The start date as a string in a format recognized by the Date constructor (e.g., "YYYY-MM-DD").
+ * @param {string} endDateStr - The end date as a string in a format recognized by the Date constructor.
+ * @param {boolean} [returnAsName=false] - Flag to determine the format of the returned month names.
+ * If true, returns month names as full names ("January", "February", etc.).
+ * If false, returns month names as numeric representations ("1" for January, "2" for February, etc.).
+ * Defaults to false.
+ * @returns {string[]} - An array of month names or numbers between the given start and end dates, inclusive.
+ * @throws {Error} - Throws an error if the start date is after the end date, with the message "Start date must be before end date".
+ *
+ * ---
+ *
+ * ## Usage Example
+ *
+ * ```typescript
+ * // Get full month names between January 1, 2022, and March 1, 2022
+ * cGetMonthBetweenDates("2022-01-01", "2022-03-01", true);
+ * // Returns ["January", "February", "March"]
+ *
+ * // Get month numbers between January 1, 2022, and March 1, 2022
+ * cGetMonthBetweenDates("2022-01-01", "2022-03-01");
+ * // Returns ["1", "2", "3"]
+ *
+ * ```
+ */
+export const cGetMonthBetweenDates = (
+  startDateStr: string,
+  endDateStr: string,
+  returnAsName = false
+): string[] => {
+  const startDate = new Date(startDateStr);
+  const endDate = new Date(endDateStr);
+
+  if (startDate > endDate) {
+    throw new Error("Start date must be before end date");
+  }
+
+  const monthNames: string[] = [];
+  const currentDate = new Date(startDate);
+
+  while (currentDate <= endDate) {
+    const monthIdentifier = returnAsName
+      ? currentDate.toLocaleString("default", { month: "long" })
+      : (currentDate.getMonth() + 1).toString();
+
+    if (!monthNames.includes(monthIdentifier)) {
+      monthNames.push(monthIdentifier);
+    }
+    currentDate.setMonth(currentDate.getMonth() + 1);
+  }
+
+  return monthNames;
+};

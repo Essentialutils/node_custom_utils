@@ -249,6 +249,19 @@ jsonToCsv([{ name: "John", age: 30 }], "users").then((path) =>
 );
 ```
 
+## Generates an array of objects, each representing a distinct month (and year) within a specified date range.
+
+```typescript
+const details = cGetYearMonthDetailsBetweenDates("2022-01-01", "2022-03-01");
+```
+
+Output:
+[
+{ year: 2022, monthNumber: 1, monthName: "January" },
+{ year: 2022, monthNumber: 2, monthName: "February" },
+{ year: 2022, monthNumber: 3, monthName: "March" }
+]
+
 ## Gets the months that fall between two given dates.
 
 1. > Get full month names between January 1, 2022, and March 1, 2022
