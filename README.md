@@ -325,6 +325,18 @@ Output:
    ```
    > returns 12345
 
+## Fetches IP address details
+
+```typescript
+cGetIpDetails("192.168.1.1")
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error("Error fetching IP details:", error);
+  });
+```
+
 ## Contributers
 
 - [Salmanul Faris K](https://github.com/iamfrs) ( Developer )
