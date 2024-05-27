@@ -1,6 +1,7 @@
 import * as fsx from "fs-extra";
 import * as fs from "fs";
-import { ID } from "./id_utils";
+import { ID } from "../id_utils";
+import { exportPath } from "../utils/utils";
 
 /**
  * ## Asynchronously converts a CSV file to a JSON array.
@@ -79,13 +80,12 @@ export const jsonToCsv = async (json: any[], name: string): Promise<string> => {
   const csvData = [headers, ...rows].join("\n");
 
   const fileName = `${name.toUpperCase()}_${idGenerator.getSnowflakeID()}.csv`;
-  const csvPath = "download/export/";
 
-  await fsx.ensureDir(csvPath);
+  await fsx.ensureDir(exportPath);
 
-  await fsx.writeFile(`${csvPath}${fileName}`, csvData, "utf8");
+  await fsx.writeFile(`${exportPath}${fileName}`, csvData, "utf8");
 
-  return `${csvPath}${fileName}`;
+  return `${exportPath}${fileName}`;
 };
 
 const escapeCSV = (value: any) => {

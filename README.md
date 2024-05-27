@@ -235,18 +235,37 @@ const result3 = cToBooleanSafe(1); // Returns true
 cSha256("data");
 ```
 
-## Asynchronously converts a CSV file to a JSON array.
+## Asynchronously converts a CSV/Excel file to a JSON array.
 
 ```typescript
 csvToJson("/path/to/file.csv").then((data) => console.log(data));
 ```
 
-## Asynchronously converts an array of JSON objects to a CSV file.
+```typescript
+excelToJson("/path/to/excel-file.xlsx").then((data) => console.log(data));
+```
+
+## Asynchronously converts an array of JSON objects to a CSV/Excel file.
+
+```javascript
+const data = [
+  { name: "John Doe", age: 30, email: "john@example.com" },
+  { name: "Jane Doe", age: 25, email: "jane@example.com" },
+];
+```
 
 ```typescript
-jsonToCsv([{ name: "John", age: 30 }], "users").then((path) =>
-  console.log(path)
-);
+jsonToCsv(data, "users").then((path) => console.log(path));
+```
+
+```javascript
+jsonToExcel(data, "users")
+  .then((filePath) => {
+    console.log("Excel file created at:", filePath);
+  })
+  .catch((error) => {
+    console.error("Error creating Excel file:", error);
+  });
 ```
 
 ## Generates an array of objects, each representing a distinct month (and year) within a specified date range.
