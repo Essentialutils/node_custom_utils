@@ -13,7 +13,7 @@
  */
 export const cGetQueryParams = (urlString: string): Map<string, string> => {
   const url = new URL(urlString);
-  return new Map(url.searchParams.entries());
+  return new Map<string, string>(url.searchParams as any);
 };
 
 /**
@@ -76,4 +76,20 @@ String.prototype.cUpdateQueryParam = function (
     // If the input string is not a valid URL, return the original string
     return this.toString();
   }
+};
+
+/**
+ * Removes the specified text from the array.
+ *
+ * @method removeText
+ * @memberof Array.prototype
+ * @param {string} textToRemove - The text to be removed from the array.
+ * @returns {string[]} A new array with the text removed.
+ * @example
+ * const array = ['hello', 'world', 'hello'];
+ * const result = array.removeText('hello');
+ * console.log(result); // Output: ['world']
+ */
+Array.prototype.removeText = function (textToRemove: string): string[] {
+  return this.filter((item) => item !== textToRemove);
 };

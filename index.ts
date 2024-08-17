@@ -36,6 +36,19 @@ declare global {
      */
     cEncodeToBase64(): string;
   }
+
+  /**
+   * Interface for Array with removeText method
+   */
+  interface Array<T> {
+    /**
+     * Removes the specified text from the array.
+     *
+     * @param {string} textToRemove - The text to be removed from the array.
+     * @returns {string[]} A new array with the text removed.
+     */
+    removeText(textToRemove: string): string[];
+  }
 }
 
 export * from "./src/depreciated";

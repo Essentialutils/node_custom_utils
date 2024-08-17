@@ -59,6 +59,14 @@
    const isDeleted = await DeleteFileSpacesBucket(fileKey);
    ```
 
+# Removes the specified text from the array.
+
+```typescript
+const array = ['hello', 'world', 'hello'];
+const result = array.removeText('hello');
+console.log(result); // Output: ['world']
+```
+
 # Verify the Integrity of Color Hash Codes
 
 1. Checks if the given string represents a valid hexadecimal color code.
