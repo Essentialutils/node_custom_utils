@@ -21,6 +21,14 @@
    console.log(`Unique ID: ${uniqueID}`);
    ```
 
+   ```typescript
+   const serial_number = idGenerator.generateSerialNumber({
+     format: "XXXXXX",
+   });
+   
+   console.log(`Serial Number: ${serial_number}`);
+   ```
+
 # File upload
 
 1. Local server.
@@ -62,8 +70,8 @@
 # Removes the specified text from the array.
 
 ```typescript
-const array = ['hello', 'world', 'hello'];
-const result = array.removeText('hello');
+const array = ["hello", "world", "hello"];
+const result = array.removeText("hello");
 console.log(result); // Output: ['world']
 ```
 

@@ -1,3 +1,5 @@
+import { SerialNum } from "./type/id_utils";
+
 /**
  * Represents a class for generating Snowflake and Unique IDs.
  */
@@ -109,5 +111,33 @@ export class ID {
 
     // Combine timestamp and random string to create a unique ID
     return `${timeStamp ? timestamp.toString(36) : ""}${randomStr(length)}`;
+  };
+
+  /**
+   * Generates a serial number based on the provided format and options.
+   *
+   * @param {SerialNum} data - The input data containing the format and options.
+   * @returns {string} The generated serial number.
+   */
+  public generateSerialNumber = (data: SerialNum): string => {
+    const {
+      format,
+      include_small_case = false,
+      separator = "-",
+      prefix = "",
+    } = data;
+
+    const chars = `${
+      include_small_case ? "abcdefghijklmnopqrstuvwxyz" : ""
+    }ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`;
+
+    // Use replace function to efficiently map format 'X' to random chars
+    const serialNumber = format
+      .replace(/X/g, () =>
+        chars.charAt(Math.floor(Math.random() * chars.length))
+      )
+      .replace(/-/g, separator); // Replace default '-' separator if provided
+
+    return prefix + serialNumber;
   };
 }
